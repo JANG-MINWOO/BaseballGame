@@ -1,13 +1,10 @@
 package BaseballGame.InputOutput;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class RandomNum {
     static Random random = new Random();
-    static Set<Integer> newAnswer = new HashSet<>();//랜덤숫자(중복안되게 생성)를 넣을 Set 컬렉션
+    static Set<Integer> newAnswer = new LinkedHashSet<>();//랜덤숫자(중복안되게 생성)를 넣을 Set 컬렉션
 
     public static int Answer() {
         while (true) {
@@ -17,7 +14,7 @@ public class RandomNum {
                 break;//Set 이라 똑같은게들어가면 사이즈 안늘어나고 다른거 3개가 들어가면
             }//break;
         }
-        Iterator<Integer> it=newAnswer.iterator();
+        //Iterator<Integer> it=newAnswer.iterator();
         for(int i:newAnswer){
             System.out.println(i);
         }

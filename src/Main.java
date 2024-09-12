@@ -1,7 +1,5 @@
 import BaseballGame.InputOutput.RandomNum;
 import BaseballGame.Verification;
-
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -15,9 +13,8 @@ public class Main {
         System.out.println("3자리수 입력해주세요: ");
         int userInput=sc.nextInt();
 
-        System.out.println(verification.findZero(userInput));
-        System.out.println(verification.getSizeCheck(userInput));
-        System.out.println(verification.FindDuplication(userInput));
+        String verifymessege = verification.verifyNumber(userInput);
+        System.out.println(verifymessege);
 
     }
 }
