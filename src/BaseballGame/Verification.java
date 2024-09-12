@@ -1,10 +1,29 @@
 package BaseballGame;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Verification { //입력받은 숫자 우선 검증
-    //입력받은수가 3자리수인가?
-    //입력받은수가 1~9만 들어있는가?
+    //입력받은수가 3자리수인가? OKAY
+    //입력받은수가 1~9만 들어있는가? OKAY
     //입력받은수가 중복은 없는가?
     public Verification() {} //일단 아무것도 없는 생성자
+
+    public boolean FindDuplication(int checkDupli){ //중복수 확인메서드
+        Set<String> dupli = new HashSet<>(); //Set 컬렉션 선언
+        String check=""+checkDupli;  //정수를 문자열로 전환, 이녀석의 인덱스는 0,1,2까지 있음(길이는 3)
+        for(int i=0;i<check.length();i++){ //문자열 인덱스 0부터 2까지 한 인덱스씩 잘라서
+            dupli.add(check.substring(i,i+1)); //Set 컬렉션에 넣음
+        }
+        if(dupli.size()==3){// 그렇게 넣은 컬렉션 크기가 3이면 중복없이 3자리가 들어갔다는 뜻
+            return true;
+        }else return false; //3이 아니면 중복되었다는 뜻이고 false return
+
+    }
+
+    public boolean getSizeCheck(int checkSize) {
+        return checkSize >= 100 && checkSize <= 999; //3자리수인지확인
+    }//3자리수면 true 반환
 
     public boolean findZero(int checkZero){
         String check=""+checkZero;//정수를 문자열로 바꾸고
@@ -15,8 +34,4 @@ public class Verification { //입력받은 숫자 우선 검증
             return false;
         }
     }
-
-    public boolean getSizeCheck(int checkSize) {
-        return checkSize >= 100 && checkSize <= 999; //3자리수인지확인
-    }//3자리수면 true 반환
 }
