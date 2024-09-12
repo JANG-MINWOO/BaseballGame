@@ -1,4 +1,4 @@
-package BaseballGame;
+package BaseballGame.GameSetting;
 
 import java.util.HashSet;
 import java.util.Set;
