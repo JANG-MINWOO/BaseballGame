@@ -45,7 +45,7 @@ public class Verification { //입력받은 숫자 우선 검증
         } else if (!findDuplication(number)) {
             return "중복된 숫자가 있습니다.";
         } else {
-            return "유효한 숫자입니다. 게임을 시작합니다.";
+            return "유효한 숫자입니다.";
         }
     }
 }
