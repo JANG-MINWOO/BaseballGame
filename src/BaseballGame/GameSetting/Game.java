@@ -14,9 +14,10 @@ public class Game {
     private Verification verification;
     private Scanner sc;
     private int[] randomNum;
+    private History history;
 
 
-    public Game() {
+    public Game(History history) {
         this.strike = new Strike();
         this.ball = new Ball();
         this.out = new Out();
@@ -24,6 +25,7 @@ public class Game {
         this.verification = new Verification();
         this.randomNum = RandomNum.generateAnswer();
         this.sc = new Scanner(System.in);
+        this.history = history;
     }//생성자
 
     private int[] getUserInput() {
@@ -40,6 +42,7 @@ public class Game {
         System.out.println(result);
     }
 
+    int gameNumber=0; //몇번째 게임인지 기록
     public void start() { //게임시작 메서드
         int attempts = 0; //시도횟수 초기화
         boolean gameWin = false;
@@ -57,23 +60,14 @@ public class Game {
                 displayResult();
                 if(strike.getStrikeCount()==3){
                     gameWin = true;
-                    System.out.println("정답입니다! "+attempts+" 번 시도하셨습니다.");
+                    gameNumber++;
+                    history.addGameHistory(attempts,gameNumber);
+                    System.out.println(gameNumber+"번째 게임"+"정답입니다! "+attempts+" 번 시도하셨습니다.");
                 }else{
                     System.out.println("틀렸습니다. 다시입력해 주세요");
                 }
             }else System.out.println(verification.verifyNumber(userNum));
         }
     }
-
-//    public boolean verification(int[] userInput) {//검증메서드
-//        Verification verification = new Verification(); //유효한 숫자입력했는지 확인 인스턴스 생성
-//        String verifymessege = verification.verifyNumber(userInput);
-//        boolean start = false;
-//        System.out.println(verifymessege);//여기까지 유효숫자 확인 끝}
-//        if (verifymessege.equals("유효한 숫자입니다.")) {
-//            start = true;
-//        }
-//        return start;
-//    }
 }
 
