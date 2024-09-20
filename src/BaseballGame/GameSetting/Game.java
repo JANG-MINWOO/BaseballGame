@@ -33,8 +33,7 @@ public class Game {
     }//생성자
 
     private int[] getUserInput() {
-        int input = sc.nextInt();
-        String str=""+input;//입력을 문자열로 전환
+        String str=sc.next();//입력을 문자열로 전환
         int[] userInput = new int[str.length()];//userInput 배열을 str의 길이로 설정
         for(int i=0;i<str.length();i++){
             userInput[i]=str.charAt(i)-'0';
