@@ -15,17 +15,21 @@ public class Game {
     private Scanner sc;
     private int[] randomNum;
     private History history;
+    private int numberOfDigits;
+    private int gameNumber; // 게임번호 생성
 
 
-    public Game(History history) {
+    public Game(History history, int numberOfDigits) {
         this.strike = new Strike();
         this.ball = new Ball();
         this.out = new Out();
         this.result = new Result();
         this.verification = new Verification();
-        this.randomNum = RandomNum.generateAnswer();
+        this.randomNum = RandomNum.generateAnswer(numberOfDigits);
         this.sc = new Scanner(System.in);
         this.history = history;
+        this.numberOfDigits= numberOfDigits;
+        this.gameNumber = 0; //초기화
     }//생성자
 
     private int[] getUserInput() {
@@ -42,23 +46,22 @@ public class Game {
         System.out.println(result);
     }
 
-    int gameNumber=0; //몇번째 게임인지 기록
     public void start() { //게임시작 메서드
         int attempts = 0; //시도횟수 초기화
         boolean gameWin = false;
 
         while (!gameWin) {
-            System.out.print("3자리 수를 입력해 주세요: ");
+            System.out.print(numberOfDigits+"자리 수를 입력해 주세요: "); //자리수 설정에 따라 다른 출력
             int[] userNum = getUserInput();
             attempts++;
 
-            if (verification.isValid(userNum)) { //유저가 입력한 수가 유효한 숫자이면
+            if (verification.isValid(userNum,numberOfDigits)) { //유저가 입력한 수가 유효한 숫자이면
                 strike.checkStrike(randomNum,userNum); //Strike 에 정답랜덤수, 유저입력수 스트라이크수 비교후 카운트
                 ball.checkBall(randomNum,userNum);
-                out.checkOut(strike.getStrikeCount(), ball.getBallCount());
+                out.checkOut(strike.getStrikeCount(), ball.getBallCount(),numberOfDigits);
                 result.updateResult(strike.getStrikeCount(), ball.getBallCount(), out.getOutCount());
                 displayResult();
-                if(strike.getStrikeCount()==3){
+                if(strike.getStrikeCount()==numberOfDigits){ //승리조건 유동적으로 변경
                     gameWin = true;
                     gameNumber++;
                     history.addGameHistory(attempts,gameNumber);
@@ -66,8 +69,12 @@ public class Game {
                 }else{
                     System.out.println("틀렸습니다. 다시입력해 주세요");
                 }
-            }else System.out.println(verification.verifyNumber(userNum));
+            }else System.out.println(verification.verifyNumber(userNum,numberOfDigits));
         }
+    }
+
+    public void setGameNumber(int gameNumber) {
+        this.gameNumber=gameNumber;
     }
 }
 
