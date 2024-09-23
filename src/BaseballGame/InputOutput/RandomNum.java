@@ -22,7 +22,7 @@ public class RandomNum {
         for(int i:newAnswer){
             usingAnswer[index++]=i;
         }
-        System.out.println(Arrays.toString(usingAnswer)); //테스트를 위해 랜덤숫자를 미리 보여주는 부분
+        //System.out.println(Arrays.toString(usingAnswer)); //테스트를 위해 랜덤숫자를 미리 보여주는 부분
         return usingAnswer;
     }
 

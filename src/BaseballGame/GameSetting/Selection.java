@@ -26,6 +26,10 @@ public class Selection {
                     System.out.println("잘못된 난이도 입니다. 3,4,5 중에서 선택해주세요.");
                     difficulty=3; //기본난이도로 재설정
                 }
+                //난이도 설정후 게임 자동으로 시작
+                game=new Game(history, difficulty); //매개변수로 난이도를 넣음
+                game.setGameNumber(gameNumber++);
+                game.start();
             }
             else if(userSelection == 1) {
                 game=new Game(history, difficulty); //매개변수로 난이도를 넣음
@@ -38,10 +42,10 @@ public class Selection {
                     history.displayHistory();
                 }
             }else if(userSelection == 3) {
-                System.out.println("종료합니다");
+                System.out.println("<숫자 야구 게임을 종료합니다>");
                 break;
             }else{
-                System.out.println("1~3의 숫자에서 입력해주세요");
+                System.out.println("0~3의 숫자에서 입력해주세요");
             }
         }
     }
