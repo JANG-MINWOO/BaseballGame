@@ -1,5 +1,6 @@
 package BaseballGame.GameSetting;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Selection {
@@ -7,6 +8,7 @@ public class Selection {
     History history = new History(); //history 인스턴스 생성
     Scanner sc = new Scanner(System.in);
     private int gameNumber=0;
+    private int userSelection;
 
     public Selection() {
     //this.game = new Game(history); //이제 게임은 유저가 1번을 선택할때 생성됨
@@ -18,20 +20,32 @@ public class Selection {
         int difficulty = 3; //기본은 난이도 3으로 설정
         while (true) {
             System.out.println("0. 난이도 선택 1. 게임 시작하기 2. 게임 기록보기 3. 종료하기");
-            int userSelection = sc.nextInt();
+            try{
+                userSelection = sc.nextInt();
+            }catch(InputMismatchException e){
+                System.out.println("잘못된 입력입니다. 숫자를 입력해 주세요.");
+                sc.next(); //잘못된 입력을 소비
+                continue;
+            }
+
             if(userSelection == 0) {
                 System.out.println("난이도를 선택해 주세요(3,4,5 자리수)");
-                difficulty=sc.nextInt();
-                if(difficulty < 3||difficulty > 5) {
-                    System.out.println("잘못된 난이도 입니다. 3,4,5 중에서 선택해주세요.");
-                    difficulty=3; //기본난이도로 재설정
-                }
+                try{
+                    difficulty=sc.nextInt();
+                    if(difficulty < 3||difficulty > 5) {
+                        System.out.println("잘못된 난이도 입니다. 3,4,5 중에서 선택해주세요.");
+                        difficulty = 3; //기본난이도로 재설정
+                    }
+                } catch (InputMismatchException e){
+                        System.out.println("잘못된 입력입니다. 숫자를 입력해 주세요.");
+                        sc.next();
+                        continue;
+                    }
                 //난이도 설정후 게임 자동으로 시작
                 game=new Game(history, difficulty); //매개변수로 난이도를 넣음
                 game.setGameNumber(gameNumber++);
                 game.start();
-            }
-            else if(userSelection == 1) {
+            }else if(userSelection == 1) {
                 game=new Game(history, difficulty); //매개변수로 난이도를 넣음
                 game.setGameNumber(gameNumber++);
                 game.start();
